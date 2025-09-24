@@ -1,0 +1,21 @@
+{
+    "name": "Java 17, Docker, Maven & Spring Boot",
+    "image": "mcr.microsoft.com/devcontainers/java:17",
+    "features": {
+        "docker-in-docker": {
+            "version": "latest"
+        }
+    },
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y docker-compose maven",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-spring-initializr",
+                "vscjava.vscode-spring-boot-dashboard",
+                "pivotal.vscode-spring-boot"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}
