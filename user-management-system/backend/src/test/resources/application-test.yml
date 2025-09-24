@@ -1,0 +1,47 @@
+# Test-specific configuration
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: false
+        
+  sql:
+    init:
+      mode: never # Don't load data.sql in tests
+  
+  h2:
+    console:
+      enabled: false
+  
+  # Disable cache for tests to avoid interference
+  cache:
+    type: none
+  
+  # Mock Redis for tests
+  data:
+    redis:
+      host: localhost
+      port: 16379  # Different port to avoid conflicts
+
+logging:
+  level:
+    com.userservice: INFO
+    org.springframework.cache: ERROR
+    org.hibernate: ERROR
+    org.springframework.web: ERROR
+    root: ERROR
+
+# Disable metrics collection in tests
+management:
+  endpoints:
+    enabled-by-default: false

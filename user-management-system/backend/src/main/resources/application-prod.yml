@@ -1,0 +1,61 @@
+# Production-specific configuration
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/userdb}
+    username: ${DATABASE_USERNAME:userapp}
+    password: ${DATABASE_PASSWORD:changeme}
+    driver-class-name: org.postgresql.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        
+  sql:
+    init:
+      mode: never
+      
+  data:
+    redis:
+      host: ${REDIS_HOST:redis-service}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      ssl: ${REDIS_SSL:false}
+      
+logging:
+  level:
+    com.userservice: INFO
+    org.springframework.cache: WARN
+    org.hibernate: WARN
+    root: WARN
+
+server:
+  error:
+    include-stacktrace: never
+    include-message: never
+
+# Security headers
+server:
+  servlet:
+    context-path: /
+  forward-headers-strategy: framework
+
+# Custom application properties  
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:https://userapp.yourdomain.com}
+  cache:
+    enabled: true
+    default-ttl: 3600 # 1 hour for production
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
