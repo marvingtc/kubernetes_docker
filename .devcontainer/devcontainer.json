@@ -1,42 +1,21 @@
 {
-    "name": "Java 21, Docker, Maven & Spring Boot",
-    "image": "mcr.microsoft.com/devcontainers/java:21",
+    "name": "Java 17, Docker, Maven & Spring Boot",
+    "image": "mcr.microsoft.com/devcontainers/java:17",
     "features": {
         "docker-in-docker": {
             "version": "latest"
-        },
-        "kubectl-helm-minikube": {
-            "version": "latest",
-            "helm": "latest",
-            "minikube": "latest"
         }
     },
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y docker-compose maven && java -version",
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y docker-compose maven",
     "customizations": {
         "vscode": {
             "extensions": [
                 "vscjava.vscode-java-pack",
                 "vscjava.vscode-spring-initializr",
                 "vscjava.vscode-spring-boot-dashboard",
-                "pivotal.vscode-spring-boot",
-                "ms-kubernetes-tools.vscode-kubernetes-tools",
-                "ms-vscode.vscode-docker",
-                "redhat.vscode-yaml"
-            ],
-            "settings": {
-                "java.configuration.runtimes": [
-                    {
-                        "name": "JavaSE-21",
-                        "path": "/usr/local/sdkman/candidates/java/current"
-                    }
-                ],
-                "java.compile.nullAnalysis.mode": "automatic",
-                "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
-            }
+                "pivotal.vscode-spring-boot"
+            ]
         }
     },
-    "remoteUser": "vscode",
-    "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-    ]
+    "remoteUser": "vscode"
 }
